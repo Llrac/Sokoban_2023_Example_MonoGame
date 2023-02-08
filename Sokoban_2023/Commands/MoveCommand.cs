@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sokoban_2023.Command
+namespace Sokoban_2023.Commands
 {
     public class MoveCommand : Command
     {
