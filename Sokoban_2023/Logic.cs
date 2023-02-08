@@ -1,7 +1,8 @@
 ﻿using SharpDX.Direct3D9;
 using Microsoft.Xna.Framework.Input;
 using System;
-using Sokoban_2023.Command;
+using Sokoban_2023.Commands;
+using Sokoban_2023.Audio;
 
 namespace Sokoban_2023
 {
@@ -69,6 +70,7 @@ namespace Sokoban_2023
          bool result = moveCmd.Execute();
          if (result)
          {
+            ServiceLocator.GetAudioProvider().PlaySFX("FALLBACK");
             History.Add(moveCmd);
          }
       }

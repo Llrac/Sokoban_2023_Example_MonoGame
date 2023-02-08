@@ -15,7 +15,6 @@ namespace Sokoban_2023
       {
          history ??= new Stack<Command>();
          history.Push(c);
-         Console.WriteLine($"stack has {history.Count} pancakes");
       }
 
       public static void Undo()

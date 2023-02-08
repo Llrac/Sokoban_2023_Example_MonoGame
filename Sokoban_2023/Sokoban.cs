@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Sokoban_2023.Audio;
 using System.Diagnostics;
 
 namespace Sokoban_2023
@@ -55,6 +56,13 @@ namespace Sokoban_2023
          logic = new(board);
          camera = new(board);
          editor = new(cursor, board);
+         ServiceLocator.SetAudioProvider(new BasicAudioService(Content));
+
+
+         // options
+
+         ServiceLocator.SetAudioProvider(new PlayAndDebugAudioService(Content));
+
       }
 
       protected override void LoadContent()
