@@ -30,19 +30,19 @@ namespace Sokoban_2023
          {
             if (InputSystem.IsKeyPressed(Keys.Right))
             {
-               board.AdjustMatrix(1,0);
+               board.AdjustAllPieces(1,0);
             }
             if (InputSystem.IsKeyPressed(Keys.Up))
             {
-               board.AdjustMatrix(0,-1);
+               board.AdjustAllPieces(0,-1);
             }
             if (InputSystem.IsKeyPressed(Keys.Down))
             {
-               board.AdjustMatrix(0, 1);
+               board.AdjustAllPieces(0, 1);
             }
             if (InputSystem.IsKeyPressed(Keys.Left))
             {
-               board.AdjustMatrix(-1, 0);
+               board.AdjustAllPieces(-1, 0);
             }
          }
 
@@ -51,12 +51,12 @@ namespace Sokoban_2023
             if (InputSystem.IsKeyPressed(Keys.D))
             {
                board.ContractLevel(1, 0);          
-               board.AdjustMatrix(-1, 0);
+               board.AdjustAllPieces(-1, 0);
             }
             if (InputSystem.IsKeyPressed(Keys.W))
             {
                board.ContractLevel(0, 1);
-               board.AdjustMatrix(0, -1);
+               board.AdjustAllPieces(0, -1);
             }
             if (InputSystem.IsKeyPressed(Keys.S))
             {
@@ -76,7 +76,7 @@ namespace Sokoban_2023
             if (InputSystem.IsKeyPressed(Keys.W))
             {
                board.ExtendLevel(0, 1);
-               board.AdjustMatrix(0, 1);
+               board.AdjustAllPieces(0, 1);
             }
             if (InputSystem.IsKeyPressed(Keys.S))
             {
@@ -85,7 +85,7 @@ namespace Sokoban_2023
             if (InputSystem.IsKeyPressed(Keys.A))
             {
                board.ExtendLevel(1, 0);
-               board.AdjustMatrix(1, 0);
+               board.AdjustAllPieces(1, 0);
             }
          }
 
@@ -165,7 +165,6 @@ namespace Sokoban_2023
 
             }
          }
-
       }
    }
 }

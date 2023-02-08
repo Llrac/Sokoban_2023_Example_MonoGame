@@ -17,7 +17,7 @@ namespace Sokoban_2023
       private Camera camera;
       private Editor editor;
 
-      public static int CELL_SIZE = 16;
+      public const int CELL_SIZE = 16;
 
       public const int GAME_WIDTH = 320;
       public const int GAME_HEIGHT = 180;
@@ -43,7 +43,7 @@ namespace Sokoban_2023
 
          char[,] sampleLevel = new char[5, 5]
          {
-            {'c','c','c','c','c'},
+            {'c','c','c','c','c'},    
             {'c','g','c','c','c'},
             {'c','c','p','b','c'},
             {'c','c','c','c','c'},
@@ -60,6 +60,8 @@ namespace Sokoban_2023
       protected override void LoadContent()
       {
          spritebatch = new SpriteBatch(GraphicsDevice);
+
+       
       }
 
       protected override void Update(GameTime gameTime)
@@ -74,6 +76,7 @@ namespace Sokoban_2023
          {
             case GAMESTATE.GAME:
                logic.Update();
+               History.Update();
                break;
             case GAMESTATE.DEBUG:
                editor.Update();

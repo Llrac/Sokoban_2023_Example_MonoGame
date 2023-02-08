@@ -1,11 +1,13 @@
 ﻿using SharpDX.Direct3D9;
+using Microsoft.Xna.Framework.Input;
 using System;
+using Sokoban_2023.Command;
 
 namespace Sokoban_2023
 {
-   internal class Logic
+    internal class Logic
    {
-      Board board;
+   private Board board;
 
       public Logic(Board board)
       {
@@ -17,22 +19,22 @@ namespace Sokoban_2023
          int xStep = 0;
          int yStep = 0;
 
-         if (InputSystem.IsKeyPressed(Microsoft.Xna.Framework.Input.Keys.Right))
+         if (InputSystem.IsKeyPressed(Keys.Right))
          {
             xStep += 1;
          }
 
-         if (InputSystem.IsKeyPressed(Microsoft.Xna.Framework.Input.Keys.Left))
+         if (InputSystem.IsKeyPressed(Keys.Left))
          {
             xStep -= 1;
          }
 
-         if (InputSystem.IsKeyPressed(Microsoft.Xna.Framework.Input.Keys.Down))
+         if (InputSystem.IsKeyPressed(Keys.Down))
          {
             yStep += 1;
          }
 
-         if (InputSystem.IsKeyPressed(Microsoft.Xna.Framework.Input.Keys.Up))
+         if (InputSystem.IsKeyPressed(Keys.Up))
          {
             yStep -= 1;
          }
@@ -58,45 +60,17 @@ namespace Sokoban_2023
 
       }
 
-      public bool Move(int x, int y, int xDir, int yDir)
+      public void Move(int x, int y, int xDir, int yDir)
       {
-         char stepper = board.GetAt(x, y);
+         CheckpointCommand checkpoint = new CheckpointCommand();
+         History.Add(checkpoint);
 
-         int ontoX = x + xDir;
-         int ontoY = y + yDir;
-         char steppingOnto = board.GetAt(ontoX, ontoY);
-
-         switch (steppingOnto)
+         MoveCommand moveCmd = new MoveCommand(x, y, xDir, yDir, board);
+         bool result = moveCmd.Execute();
+         if (result)
          {
-            case Board.WALL:
-            case Board.UNAVALIABLE:
-               return false;
-
-            case Board.GROUND:
-               board.SetAt(x, y, char.IsUpper(stepper) ? Board.GOAL : Board.GROUND);
-               board.SetAt(ontoX, ontoY, char.ToLower(stepper));
-               return true;
-
-            case Board.GOAL:
-               board.SetAt(x, y, char.IsUpper(stepper) ? char.ToLower(stepper) : Board.GROUND);
-               board.SetAt(ontoX, ontoY, char.ToUpper(stepper));
-               return true;
-
-            case Board.BOX_AND_GOAL:
-            case Board.BOX:
-               if (Move(ontoX, ontoY, xDir, yDir) == true)
-               {
-                  board.SetAt(x, y, char.IsUpper(stepper) ? Board.GOAL : Board.GROUND);
-                  board.SetAt(ontoX, ontoY, char.IsUpper(steppingOnto) ? char.ToUpper(stepper) : char.ToLower(stepper));
-                  return true;
-               }
-               return false;
-
-            default:
-               Console.WriteLine($"non-implemented logic trying to step onto: {steppingOnto}");
-               return false;
+            History.Add(moveCmd);
          }
-
       }
 
 

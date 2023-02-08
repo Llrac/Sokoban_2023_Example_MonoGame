@@ -13,21 +13,21 @@ namespace Sokoban_2023
 
       private char[,] level;
 
-      public readonly Texture2D ground;
-      public readonly Texture2D wall;
-      public readonly Texture2D box;
-      public readonly Texture2D goal;
-      public readonly Texture2D player;
-      private readonly Texture2D black;
+      public  readonly  Texture2D ground;
+      public  readonly  Texture2D wall;
+      public  readonly  Texture2D box;
+      public  readonly  Texture2D goal;
+      public  readonly  Texture2D player;
+      private readonly  Texture2D black;
 
-      public const char GROUND = 'c';
-      public const char WALL = 'w';
-      public const char GOAL = 'g';
-      public const char BOX = 'b';
-      public const char PLAYER = 'p';
+      public const char GROUND      = 'c';
+      public const char WALL        = 'w';
+      public const char GOAL        = 'g';
+      public const char BOX         = 'b';
+      public const char PLAYER      = 'p';
       public const char UNAVALIABLE = 'x';
 
-      public const char BOX_AND_GOAL = 'B';
+      public const char BOX_AND_GOAL    = 'B';
       public const char PLAYER_AND_GOAL = 'P';
 
       public Board(ContentManager c)
@@ -74,7 +74,7 @@ namespace Sokoban_2023
 
       public void ContractLevel(int xAmount, int yAmount)
       {
-         char[,] newlvl = new char[width - xAmount, height -yAmount];
+         char[,] newlvl = new char[width - xAmount, height - yAmount];
     
          for (int x = 0; x <  width - xAmount; x++)
          {
@@ -89,7 +89,7 @@ namespace Sokoban_2023
          height = newlvl.GetLength(1);
       }
 
-      public void AdjustMatrix( int x, int y)
+      public void AdjustAllPieces( int x, int y)
       {
          int rowCount = level.GetLength(0);
          int colCount = level.GetLength(1);
@@ -148,7 +148,6 @@ namespace Sokoban_2023
       public void Draw(SpriteBatch batch, Vector2 camOffset)
       {
          int y = -1;
-
          for (int i = 0; i < width * height; i++)
          {
             int x = i % width;
@@ -174,6 +173,7 @@ namespace Sokoban_2023
 
             Vector2 position = new Vector2(x * Sokoban.CELL_SIZE, y * Sokoban.CELL_SIZE);
             position += camOffset;
+
             Vector2 playerOffset = new Vector2(0, -player.Height / 2);
 
             switch (level[x, y])
