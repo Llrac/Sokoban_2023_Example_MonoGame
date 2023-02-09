@@ -16,7 +16,7 @@ namespace Sokoban_2023
          this.board = board;
       }
 
-      public int GetXoffset()
+      public int GetXOffset()
       {
          int offset = Sokoban.GAME_WIDTH / 2;
          offset -= board.width * Sokoban.CELL_SIZE / 2;
@@ -32,7 +32,7 @@ namespace Sokoban_2023
 
       public Vector2 GetOffset()
       {
-         return new Vector2(GetXoffset(), GetYOffset());
+         return new Vector2(GetXOffset(), GetYOffset());
       }
 
    }
